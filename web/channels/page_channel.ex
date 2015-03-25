@@ -3,7 +3,7 @@ defmodule George.PageChannel do
   require Logger
 
   def join("page:" <> page_hash, message, socket) do
-    # Logger.debug "JOIN #{socket.topic} => #{page_hash}"
+    Logger.debug "JOIN #{socket.topic} => #{page_hash} #{inspect message}"
     reply socket, "join", %{status: "connected"}
     broadcast! socket, "user:entered", message
     {:ok, socket}
@@ -14,15 +14,15 @@ defmodule George.PageChannel do
     {:ok, socket}
   end
 
-  def handle_in("new:msg", message, socket) do
-    Logger.debug "MSG #{message}"
-    broadcast! socket, "new:msg", message
-    {:ok, socket}
-  end
+  # def handle_in("new:msg", message, socket) do
+  #   Logger.debug "MSG #{message}"
+  #   broadcast! socket, "new:msg", message
+  #   {:ok, socket}
+  # end
 
-  def handle_out(event, message, socket) do
-    Logger.debug "OUT #{message}"
-    reply socket, event, message
-    {:ok, socket}
-  end
+  # def handle_out(event, message, socket) do
+  #   Logger.debug "OUT #{message}"
+  #   reply socket, event, message
+  #   {:ok, socket}
+  # end
 end
