@@ -4,13 +4,15 @@ defmodule George.PageChannel do
 
   def join("page:" <> page_hash, message, socket) do
     Logger.debug "JOIN #{socket.topic} => #{page_hash} #{inspect message}"
+    socket = assign(socket, :name, message["name"])
     reply socket, "join", %{status: "connected"}
     broadcast! socket, "user:entered", message
     {:ok, socket}
   end
 
-  def leave(reason, socket) do
+  def leave(_reason, socket) do
     Logger.debug "LEAVE #{socket.topic}"
+    broadcast! socket, "user:entered", socket.assigns
     {:ok, socket}
   end
 
