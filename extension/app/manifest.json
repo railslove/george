@@ -1,8 +1,8 @@
 {
-  "name": "__MSG_appName__",
-  "version": "0.0.1",
+  "name": "George",
+  "version": "0.0.19",
   "manifest_version": 2,
-  "description": "__MSG_appDescription__",
+  "description": "George can see you",
   "icons": {
     "16": "images/icon-16.png",
     "128": "images/icon-128.png"
@@ -21,5 +21,8 @@
     },
     "default_title": "George",
     "default_popup": "popup.html"
-  }
+  },
+  "permissions": [
+    "tabs"
+  ]
 }
