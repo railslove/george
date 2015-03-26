@@ -1,6 +1,6 @@
 {
   "name": "George",
-  "version": "0.0.19",
+  "version": "0.0.42",
   "manifest_version": 2,
   "description": "George can see you",
   "icons": {
@@ -23,6 +23,7 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "identity"
   ]
 }

@@ -11,20 +11,35 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 chrome.browserAction.setBadgeText({text: '\'George'});
 
+var user = "Hugo";
+
+chrome.runtime.onMessage.addListener( function(req, sender, sendResponse) {
+  user = req.name
+});
+
 chrome.tabs.onHighlighted.addListener(function (highlightInfo) {
   chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
      // since only one tab should be active and in the current window at once
      // the return variable should only have one entry
      var activeTab = arrayOfTabs[0];
 
-     console.log(activeTab.url)
+     // console.log(activeTab.url)
   });
 });
+
+var keep;
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (changeInfo.status == "complete") {
 
-    socket.join("page:lobby", { name: "Chrome" }, function (chan) {
+    var hashed_url = window.btoa(encodeURIComponent( escape( tab.url )));
+
+    if ( socket.isConnected() ) {
+      console.log(socket.topic);
+      socket.leave("page:"+keep);
+    }
+
+    socket.join("page:"+hashed_url, { name: user }, function (chan) {
 
       chan.on("join", function (msg) {
         console.log(msg)
@@ -35,6 +50,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
       });
 
     });
+
+    keep = hashed_url
 
     console.log(tab.url)
   }
