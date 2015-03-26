@@ -1,6 +1,8 @@
 {
   "name": "george",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "elixir-phoenix": "0.8.0"
+  },
   "devDependencies": {}
 }
