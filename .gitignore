@@ -5,3 +5,11 @@
 
 # Generate on crash by the VM
 erl_crash.dump
+/extension/.tmp
+/extension/bower_components
+/extension/node_modules
+/extension/package
+/extension/dist
+/backend/_build
+/backend/deps
+extension/.jshintrc
