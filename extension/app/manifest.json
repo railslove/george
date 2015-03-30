@@ -1,6 +1,6 @@
 {
   "name": "George",
-  "version": "0.0.42",
+  "version": "0.0.60",
   "manifest_version": 2,
   "description": "George can see you",
   "icons": {
@@ -22,6 +22,17 @@
     "default_title": "George",
     "default_popup": "popup.html"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/inject.js"
+      ]
+    }
+  ],
   "permissions": [
     "tabs",
     "identity"
