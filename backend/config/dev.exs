@@ -10,7 +10,10 @@ config :george, George.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   cache_static_lookup: false,
-  watchers: []
+  watchers: [],
+  https: [port: 4443,
+           keyfile: System.get_env("GEORGE_SSL_KEY_PATH"),
+           certfile: System.get_env("GEORGE_SSL_CERT_PATH")]
 
 # Watch static and templates for browser reloading.
 # *Note*: Be careful with wildcards. Larger projects
