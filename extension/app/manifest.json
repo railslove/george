@@ -1,6 +1,6 @@
 {
   "name": "George",
-  "version": "0.0.60",
+  "version": "0.0.76",
   "manifest_version": 2,
   "description": "George can see you",
   "icons": {
@@ -34,6 +34,8 @@
     }
   ],
   "permissions": [
+    "*://*/",
+    "activeTab",
     "tabs",
     "identity"
   ]
