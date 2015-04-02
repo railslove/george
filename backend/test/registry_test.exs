@@ -15,4 +15,11 @@ defmodule George.RegistryTest do
     George.Page.add(page, "test@test.com")
     assert George.Page.all(page) == ["test@test.com"]
   end
+
+  test "removes page on exit", %{registry: registry} do
+    George.Registry.create(registry, "http://www.railslove.com")
+    {:ok, page} = George.Registry.lookup(registry, "http://www.railslove.com")
+    Agent.stop(page)
+    assert George.Registry.lookup(registry, "http://www.railslove.com") == :error
+  end
 end
