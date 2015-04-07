@@ -7,10 +7,15 @@ defmodule George do
     import Supervisor.Spec, warn: false
 
     children = [
+      # Start our page registry
+      worker(George.Registry, [[name: George.Registry]]),
+
       # Start the endpoint when the application starts
       supervisor(George.Endpoint, []),
+
       # Start the Ecto repository
       worker(George.Repo, []),
+
       # Here you could define other workers and supervisors as children
       # worker(George.Worker, [arg1, arg2, arg3]),
     ]
