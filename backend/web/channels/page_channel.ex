@@ -11,7 +11,7 @@ defmodule George.PageChannel do
     George.Registry.create(George.Registry, page_hash)
     {:ok, page} = George.Registry.lookup(George.Registry, page_hash)
     George.Page.add(page, message["name"])
-    reply socket, "join", %{status: "connected", people: George.Page.all(page)}
+    reply socket, "join", %{status: "connected", people: George.Page.all(page) -- [message["name"]]}
 
     broadcast! socket, "user:entered", %{status: "connected", user: message["name"], id: message["id"]}
 
