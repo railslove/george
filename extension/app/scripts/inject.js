@@ -17,11 +17,14 @@ function init(name) {
 
     chan.on("join", function (msg) {
       console.log(msg)
+      msg.people.forEach(function(person) {
+        $('#george-list').append("<li style='display: inline-block; margin-left: 10px;' id='"+ person +"'><div style='min-width: 50px;min-height: 50px;'><img src='https://www.gravatar.com/avatar/"+person+"?s=50' /></div></li>")
+      })
     });
 
     chan.on("user:entered", function (msg) {
       console.log(msg)
-      $('#george-list').append("<li style='display: inline-block; margin-left: 10px;' id='"+ msg.id +"'><div style='min-width: 50px;min-height: 50px;'><img src='https://www.gravatar.com/avatar/"+msg.user+"?s=50' /></div></li>")
+      $('#george-list').append("<li style='display: inline-block; margin-left: 10px;' id='"+ msg.user +"'><div style='min-width: 50px;min-height: 50px;'><img src='https://www.gravatar.com/avatar/"+msg.user+"?s=50' /></div></li>")
     });
 
     chan.on("user:left", function (msg) {
