@@ -12,7 +12,7 @@ defmodule George.Page do
   Add a new user to the list of currently online users
   """
   def add(page, email) do
-    Agent.update(page, fn online -> online ++ [email] end)
+    Agent.update(page, fn online -> Enum.uniq(online ++ [email]) end)
   end
 
   @doc """
