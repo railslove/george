@@ -24,11 +24,13 @@ function init(name) {
 
     chan.on("user:entered", function (msg) {
       console.log(msg)
-      $('#george-list').append("<li style='display: inline-block; margin-left: 10px;' id='"+ msg.user +"'><div style='min-width: 50px;min-height: 50px;'><img src='https://www.gravatar.com/avatar/"+msg.user+"?s=50' /></div></li>")
+      if (!$("#"+msg.user)[0]) {
+        $('#george-list').append("<li style='display: inline-block; margin-left: 10px;' id='"+ msg.user +"'><div style='min-width: 50px;min-height: 50px;'><img src='https://www.gravatar.com/avatar/"+msg.user+"?s=50' /></div></li>")
+      }
     });
 
     chan.on("user:left", function (msg) {
-      $("#"+msg.id).remove();
+      $("#"+msg.user).remove();
     });
 
   });
