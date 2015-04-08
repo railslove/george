@@ -11,11 +11,18 @@ function init(name) {
 
   var hashed_url = window.btoa(encodeURIComponent( escape( window.location.href )));
 
-  $("<div style='top: auto;right: 25px;bottom: 25px;left: auto;position: fixed;'><ul style='text-align: center; list-style-type: none;' id='george-list'></ul></div>").appendTo("body")
+  $("<div style='z-index: 999;top: auto;right: 25px;bottom: 25px;left: auto;position: fixed;'><ul style='text-align: center; list-style-type: none;' id='george-list'></ul></div>").appendTo("body")
 
   if (!socket.channels.filter( function(chan) { return chan.isMember("page:"+hashed_url) } )[0] ) {
+
+    socket.channels.forEach(function(chan) {
+      chan.leave();
+    });
+
     socket.join("page:"+hashed_url, { name: user, id: id }, function (chan) {
       chan.on("join", function (msg) {
+        console.log("user:join", msg)
+        $('#george-list').empty();
         msg.people.forEach(function(person) {
           $('#george-list').append("<li style='display: inline-block; margin-left: 10px;' id='"+ person +"'><div style='min-width: 50px;min-height: 50px;'><img src='https://www.gravatar.com/avatar/"+person+"?s=50' /></div></li>")
         })
