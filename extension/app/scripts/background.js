@@ -31,11 +31,13 @@ chrome.tabs.onHighlighted.addListener(function (highlightInfo) {
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (changeInfo.status == "complete") {
 
-    console.log(tab.url)
     if (user) {
-     chrome.tabs.executeScript(null, {code:"init('"+user+"')"});
+      if (/^https?/.test(tab.url)) {
+        console.log('injecting into', tab.url)
+        chrome.tabs.executeScript(null, {code:"init('"+user+"')"});
+      }
     } else {
-      console.log('please specify a name')
+      console.log('please specify a name', tab.url)
     }
 
   }
