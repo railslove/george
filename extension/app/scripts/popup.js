@@ -17,6 +17,7 @@ $("#gravatar").on('click', function(e) {
   window.localStorage.removeItem("gravatarUser")
   $("#gravatar").attr('src', "https://www.gravatar.com/avatar/null?s=150")
   $('#name').val("")
+  setTimeout(window.close,500);
 });
 
 $("form").on('submit', function(e) {
@@ -31,5 +32,7 @@ $("form").on('submit', function(e) {
   chrome.runtime.sendMessage({ name: md5Email }, function(response) {});
 
   console.log($('#name').val());
+
+  setTimeout(window.close,500);
 });
 
